@@ -32,7 +32,7 @@ npm run start # or `yarn start` or `pnpm start`
 If you want to build it just run
 Just run
 
-````bash
+```bash
 npm run build # or `yarn build` or `pnpm build`
 ```
 
