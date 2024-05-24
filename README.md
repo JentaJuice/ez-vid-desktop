@@ -41,4 +41,3 @@ npm run build # or `yarn build` or `pnpm build`
 <center>
   Made w/ 🤍 by <a href="https://github.com/dethMastery" target="_blank">Suphakit P.</a>
 </center>
-````
