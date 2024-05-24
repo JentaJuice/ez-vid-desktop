@@ -1,21 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JentaJuice ezVideo Generator</title>
-</head>
-<body>
-  <h1>
-    Hey from frontend!!
-  </h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JentaJuice ezVideo Generator</title>
 
-  <input type="file" id="file" name="music" onchange="music()" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="bg-blur"></div>
+    <div class="container">
+      <div class="form-container">
+        <div>
+          <p id="musicPath"></p>
+          <label for="music" class="upload-label"> Add Music </label>
+          <input
+            type="file"
+            id="music"
+            name="music"
+            onchange="music()"
+            required
+          />
+        </div>
+        <div>
+          <p id="imagePath"></p>
+          <label for="image" class="upload-label"> Add Image </label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            onchange="image()"
+            required
+          />
+        </div>
+        <button type="submit" onclick="convert()">Convert</button>
+      </div>
+    </div>
 
-  <script>
-    function music() {
-      console.log(document.querySelector('#file').files[0].path)
-    }
-  </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.11.0/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+      let musicPath
+      let imagePath
+      let outputPath
+
+      const musicPathElement = document.querySelector('#musicPath')
+      const imagePathElement = document.querySelector('#imagePath')
+
+      if (musicPath == undefined) {
+        musicPathElement.innerHTML = 'No Music Loaded'
+      }
+
+      if (imagePath == undefined) {
+        imagePathElement.innerHTML = 'No Image Loaded'
+      }
+
+      function music() {
+        console.log(document.querySelector('#music').files[0].type)
+
+        const regex = /audio\/[A-Za-z]+/i
+        const type = document.querySelector('#music').files[0].type
+
+        if (type.match(regex)) {
+          musicPath = document.querySelector('#music').files[0].path
+          musicPathElement.innerHTML = String(musicPath)
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Hey! You added wrong file type 🤦',
+            icon: 'error',
+            confirmButtonText: 'Okay',
+          })
+        }
+      }
+
+      function image() {
+        console.log(document.querySelector('#image').files[0].type)
+
+        const regex = /image\/[A-Za-z]+/i
+        const type = document.querySelector('#image').files[0].type
+
+        if (type.match(regex)) {
+          imagePath = document.querySelector('#image').files[0].path
+          imagePathElement.innerHTML = String(imagePath)
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Hey! You added wrong file type 🤦',
+            icon: 'error',
+            confirmButtonText: 'Okay',
+          })
+        }
+      }
+
+      function convert() {
+        if (musicPath != undefined || imagePath != undefined) {
+          outputPath = document
+            .querySelector('#music')
+            .files[0].path.split('/')
+            .slice(0, -1)
+            .join('/')
+
+          console.log(musicPath)
+          console.log(imagePath)
+          console.log(outputPath)
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Hey! You just forget to add some file 🤦',
+            icon: 'error',
+            confirmButtonText: 'Okay',
+          })
+        }
+      }
+    </script>
+  </body>
 </html>
