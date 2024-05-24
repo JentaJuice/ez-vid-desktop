@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JentaJuice ezVideo Generator</title>
+</head>
+<body>
+  <h1>
+    Hey from frontend!!
+  </h1>
+
+  <input type="file" id="file" name="music" onchange="music()" />
+
+  <script>
+    function music() {
+      console.log(document.querySelector('#file').files[0].path)
+    }
+  </script>
+</body>
+</html>
